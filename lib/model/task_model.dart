@@ -1,11 +1,16 @@
 class TaskModel{
-
-  final String task;
-  final String description;
+  final String title;
   final String date;
   final String time;
-
+   TaskState taskState;
   TaskModel({
-    required this.task,required this.description,
-    required this.date,required  this.time});
+    required this.title,required this.date,required this.time,
+  this.taskState=TaskState.task});
+}
+
+
+enum TaskState{
+  task,
+  done,
+  archive
 }

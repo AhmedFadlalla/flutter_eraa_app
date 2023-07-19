@@ -7,12 +7,8 @@ import 'package:flutter_test_app/const/component/constabt.dart';
 import 'package:flutter_test_app/const/dio/dio_helper.dart';
 import 'package:flutter_test_app/screens/chat_app/chat_home_screen/chat_home_screen.dart';
 import 'package:flutter_test_app/screens/chat_app/login_screen/login_screen.dart';
-import 'package:flutter_test_app/screens/note_app/note_screen/note_screen.dart';
-import 'package:flutter_test_app/screens/todo_screen/to_do_screen.dart';
-import 'package:flutter_test_app/screens/world_timer_app/cubit/world_timer_cubit.dart';
-import 'package:flutter_test_app/screens/world_timer_app/screens/choose_region_screen.dart';
+import 'package:flutter_test_app/screens/todo_screen/screen/todo_screen.dart';
 
-import 'SCREENS/home_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +44,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:  NoteScreen(),
+      home:  ToDoScreen(),
     );
   }
 }
