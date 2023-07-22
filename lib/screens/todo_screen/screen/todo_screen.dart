@@ -269,7 +269,7 @@ class ToDoScreen extends StatelessWidget {
                 ),
                 BlocConsumer<TodoCubit, TodoState>(
                   listener: (context, state) {
-                    // TODO: implement listener
+                    // test listener
                   },
                   builder: (context, state) {
 
