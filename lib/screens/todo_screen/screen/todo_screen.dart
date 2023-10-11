@@ -175,7 +175,8 @@ class ToDoScreen extends StatelessWidget {
                                     style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
                                     onPressed: (){
                                      if(cubit.formKey.currentState!.validate()){
-                                       cubit.addTask(task: TaskModel(
+
+                                       cubit.addTask(taskModel: TaskModel(
                                            title: cubit.titleController.text,
                                            date: cubit.dateController.text,
                                            time: cubit.timeController.text));
@@ -217,7 +218,8 @@ class ToDoScreen extends StatelessWidget {
                   },
                   builder: (context, state) {
 
-                    return cubit.tasks.isNotEmpty? ListView.separated(
+                    return cubit.tasks.isNotEmpty?
+                    ListView.separated(
                         itemBuilder: (context,index)=>
                         Container(
                       decoration: BoxDecoration(
@@ -250,7 +252,7 @@ class ToDoScreen extends StatelessWidget {
                               ),
                             ),
                             IconButton(onPressed: (){
-                              cubit.addDoneTask(index);
+                              cubit.addDoneTask(index: index);
                             }, icon: Icon(Icons.done,color: Colors.amber,size: 28,))
                           ],
                         ),
@@ -267,6 +269,7 @@ class ToDoScreen extends StatelessWidget {
                         );
                   },
                 ),
+
                 BlocConsumer<TodoCubit, TodoState>(
                   listener: (context, state) {
                     // test listener
@@ -305,7 +308,9 @@ class ToDoScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                IconButton(onPressed: (){}, icon: Icon(Icons.done,color: Colors.amber,size: 28,))
+                                IconButton(onPressed: (){
+                                  cubit.addArchiveTask(index: index);
+                                }, icon: Icon(Icons.done,color: Colors.amber,size: 28,))
                               ],
                             ),
                           ),
@@ -321,7 +326,59 @@ class ToDoScreen extends StatelessWidget {
                     );
                   },
                 ),
-                Text("Archive", style: TextStyle(color: Colors.white)),
+                BlocConsumer<TodoCubit, TodoState>(
+                  listener: (context, state) {
+                    // test listener
+                  },
+                  builder: (context, state) {
+
+                    return cubit.archive.isNotEmpty? ListView.separated(itemBuilder: (context,index)=>
+                        Container(
+
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              border: Border.all(color: Colors.amber)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(cubit.archive[index].title,style: TextStyle(
+                                          fontSize: 22,
+                                          color: Colors.white
+                                      ),),
+                                      SizedBox(height: 4,),
+                                      Text(cubit.archive[index].date,style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey
+                                      ),),
+                                      SizedBox(height: 4,),
+                                      Text(cubit.archive[index].time,style: TextStyle(
+                                          fontSize: 18,
+                                          color: Colors.grey
+                                      ),),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        separatorBuilder: (context,index)=>SizedBox(height: 8,),
+                        itemCount: cubit.archive.length):Center(
+                      child: Text("No Data Available",style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.amber
+
+                      ),),
+                    );
+                  },
+                ),
               ]),
             ),
           );
